@@ -2,7 +2,7 @@ import { useEffect,useState } from "react";
 
 const TIMER = 20000
 
-export default function QuestionTimer({nextQuestion, question}){
+export default function QuestionTimer({nextQuestion, question, handleUserAnswers}){
   const [timer,setTimer] = useState(TIMER)
 
    
@@ -21,6 +21,7 @@ export default function QuestionTimer({nextQuestion, question}){
 
   useEffect(()=>{
     if(timer === 0){
+        handleUserAnswers("Skipped Question",question.id)
         nextQuestion()
     }
   },[timer])

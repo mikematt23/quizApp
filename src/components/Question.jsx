@@ -1,19 +1,29 @@
 import QuestionTimer from "./QuestionTimer"
 import Answers from "./Answers"
 
-export default function Question({question, nextQuestion,  handleUserAnswers, userAnswers}){
+export default function Question({
+    question, 
+    nextQuestion,  
+    handleUserAnswers, 
+    handleRightAnswer,
+    handleWrongAnswer
+  }){
    return(
     <div id="question">
        <QuestionTimer 
          question= {question} 
          nextQuestion = {nextQuestion}
+         handleUserAnswers = {handleUserAnswers}
        />
        <h2>{question.text}</h2>
        <Answers 
-         answers={question.answers} 
+         id ={question.id}
+         answers={question.answers}
+         correctAnswer = {question.answers[question.correctAnswer]} 
          nextQuestion = {nextQuestion}
          handleUserAnswers = {handleUserAnswers}
-         userAnswers ={userAnswers}
+         handleRightAnswer = {handleRightAnswer}
+         handleWrongAnswer = {handleWrongAnswer}
        />
     </div>
    )

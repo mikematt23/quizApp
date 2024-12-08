@@ -1,15 +1,29 @@
 
 
-const Answers = (props)=>{
+const Answers = ({
+  id,
+  answers,
+  correctAnswer,
+  handleUserAnswers,
+  nextQuestion,
+  handleRightAnswer,
+  handleWrongAnswer
+})=>{
+  
   const handleClick = (event)=>{
-     props.handleUserAnswers(event.target.textContent)
-   
-     props.nextQuestion()
+     handleUserAnswers(event.target.textContent,id)
+     if(correctAnswer === event.target.textContent){
+      handleRightAnswer()
+     }else{
+      handleWrongAnswer()
+     }
+     nextQuestion()
   }
+
   return (
       <ul id="answers">
-        {props.answers.map((answer)=>{
-          return <li className="answer">
+        {answers.map((answer)=>{
+          return <li key={answer.id} className="answer">
             <button onClick={handleClick}>{answer}</button>
           </li>
         })}
