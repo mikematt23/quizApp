@@ -22,7 +22,6 @@ const Login = ({handleIsLoggedIn, handleUser})=>{
             password:passwordRef.current.value
           })
         })
-        
         const json = await user.json()
         if(json.message === "No User"){
           setMessage("No User, Please Sign Up")
