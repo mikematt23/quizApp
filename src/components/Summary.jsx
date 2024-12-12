@@ -1,12 +1,25 @@
+import { useEffect } from "react"
 import logo from "../assets/quiz-complete.png"
 import QUESTIONS from "../assets/questions"
+
 const Summary = ({
    answersCorrect,
    answersWrong,
    answerSkipped,
-   userAnswers
+   userAnswers,
+   userEmail
 })=>{
-  console.log(userAnswers)
+   useEffect(()=>{
+      console.log("here")
+      fetch("https://reactquizexpressapi-production.up.railway.app/UpdateUserScore",{
+         headers:{
+            "Content-type":"application/json"
+         },
+         method: "PUT",
+         body: JSON.stringify({email: userEmail, score: Math.round(answersCorrect/QUESTIONS.length*100)})
+      })
+   },[])
+
    return(
     <div id="summary">
        <img src={logo} alt="" />

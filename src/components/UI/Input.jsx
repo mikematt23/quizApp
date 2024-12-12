@@ -1,9 +1,7 @@
-import { useRef } from "react"
+import { forwardRef } from "react"
 
-const Input = ({type,placeHolder})=>{
-  const input = useRef()
-
-   return <input className="input" ref={input} type={type} placeholder={placeHolder}/>
-}
+const Input = forwardRef(function Input({type,placeHolder},ref){
+   return <input className="input" ref={ref} type={type} placeholder={placeHolder}/>
+})
 
 export default Input 
