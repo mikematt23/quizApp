@@ -4,15 +4,13 @@ import Input from "../UI/Input"
 
 const Login = ({handleIsLoggedIn, handleUser})=>{
     const [message,setMessage] = useState("")
-    const [email,setEmail] = useState("")
-    const [password, setPassword] = useState("")
 
     const emailRef = useRef()
     const passwordRef = useRef()
 
     const handleLogin = async()=>{
         if(emailRef.current.value === ""|| passwordRef.current.value === "" ){
-           setMessage("Form Must Be Filled Out")
+           return setMessage("Form Must Be Filled Out")
         }
         const user = await fetch("https://reactquizexpressapi-production.up.railway.app/userLogin",{
           headers:{
@@ -24,8 +22,8 @@ const Login = ({handleIsLoggedIn, handleUser})=>{
             password:passwordRef.current.value
           })
         })
+        
         const json = await user.json()
-        console.log(json)
         if(json.message === "No User"){
           setMessage("No User, Please Sign Up")
         }
@@ -43,7 +41,7 @@ const Login = ({handleIsLoggedIn, handleUser})=>{
 
     const handleSignUp = async ()=>{
       if(emailRef.current.value === ""|| passwordRef.current.value === "" ){
-        setMessage("Please Fill Out Form To Sign Up")
+        return setMessage("Please Fill Out Form To Sign Up")
       }
       const user = await fetch("https://reactquizexpressapi-production.up.railway.app/addUser",{
         headers:{
@@ -56,9 +54,8 @@ const Login = ({handleIsLoggedIn, handleUser})=>{
         })
       })
       const json = await user.json()
-      console.log(json)
       if(json.message === "already a user"){
-        setMessage("Already A User, Please Sign In")
+        return setMessage("Already A User, Please Sign In")
       }
       if(json.message === "user added"){
         handleUser({

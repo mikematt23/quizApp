@@ -10,7 +10,6 @@ const Summary = ({
    userEmail
 })=>{
    useEffect(()=>{
-      console.log("here")
       fetch("https://reactquizexpressapi-production.up.railway.app/UpdateUserScore",{
          headers:{
             "Content-type":"application/json"
